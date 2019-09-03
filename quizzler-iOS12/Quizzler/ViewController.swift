@@ -25,6 +25,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         let firstQuestion = allQuestions.list[questionNumber]
         questionLabel.text = firstQuestion.questionText
+        progressLabel.text = String(questionNumber + 1) + "/13"
     }
 
 
@@ -42,8 +43,8 @@ class ViewController: UIViewController {
     func updateUI() {
       questionLabel.text = allQuestions.list[questionNumber].questionText
     scoreLabel.text = String(totalScore)
-        progressLabel.text = String(questionNumber) + "/13"
-        prog
+        progressLabel.text = String(questionNumber + 1) + "/13"
+        progressBar.frame.size.width = ( view.frame.size.width / 13) * CGFloat(questionNumber + 1 )
         
     }
     
@@ -61,17 +62,29 @@ class ViewController: UIViewController {
         } else{
             totalScore = totalScore - 5
         }
-        if questionNumber < 12 {
+        if questionNumber < ( allQuestions.list.count - 1 )   {
         nextQuestion()
         updateUI()
         } else {
+            let alert = UIAlertController(title: "End Quiz?", message: "Your quiz is finish do you want restart?",         preferredStyle: UIAlertController.Style.alert)
             
+            alert.addAction(UIAlertAction(title: "Restart", style: UIAlertAction.Style.default, handler: { _ in
+                self.startOver()
+            }))
+            alert.addAction(UIAlertAction(title: "Finish",
+                                          style: UIAlertAction.Style.default,
+                                          handler: {(_: UIAlertAction!) in
+                                            //Sign out action
+            }))
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
     
     func startOver() {
-       
+        questionNumber  = 0
+        totalScore = 0
+        updateUI()
     }
     
 
