@@ -59,8 +59,10 @@ class ViewController: UIViewController {
         let correctAnswer = allQuestions.list[questionNumber].answer
         if correctAnswer == pickedAnswer {
             totalScore = totalScore + 10
+            ProgressHUD.showSuccess("Correct")
         } else{
             totalScore = totalScore - 5
+            ProgressHUD.showError("Wrong!")
         }
         if questionNumber < ( allQuestions.list.count - 1 )   {
         nextQuestion()
