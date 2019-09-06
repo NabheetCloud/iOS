@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
-<<<<<<< HEAD
+
     @IBOutlet weak var imageView1: UIImageView!
     @IBOutlet weak var imageView2: UIImageView!
 =======
